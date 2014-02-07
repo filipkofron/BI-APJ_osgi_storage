@@ -1,12 +1,7 @@
-package cz.kofron.storage.view;
-
-import java.util.Hashtable;
+package cz.kofron.storage.control;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-
-import cz.kofron.storage.view.service.IViewService;
-import cz.kofron.storage.view.service.ViewServiceFactory;
 
 public class Activator implements BundleActivator {
 
@@ -22,12 +17,6 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		
-		Hashtable<String, String> properties = new Hashtable<>();
-		properties.put("type", "javafx");
-
-		System.out.println("ViewActivator: Registering View service!");
-		bundleContext.registerService(IViewService.class.getName(), new ViewServiceFactory(), properties);
 	}
 
 	/*

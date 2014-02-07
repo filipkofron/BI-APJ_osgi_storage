@@ -22,7 +22,7 @@ public class AppRun
 		{
 			while(running)
 			{
-				System.out.println("App: Starting view ..");
+				System.out.println("AppThread: Starting view ..");
 				viewService.initializeView();
 				
 				try
@@ -36,7 +36,7 @@ public class AppRun
 				{
 				}
 			}
-			System.out.println("App: Destroying view ..");
+			System.out.println("AppThread: Destroying view ..");
 			viewService.destroyView();
 		}
 		
@@ -60,7 +60,7 @@ public class AppRun
 	
 	public static void onViewAvailable(IViewService viewService)
 	{
-		System.out.println("A view became available.");
+		System.out.println("AppThread: A view became available.");
 		lock.lock();
 		if(thread == null)
 		{

@@ -12,14 +12,14 @@ public class ViewServiceImpl implements IViewService
 	{		
 		if(!viewInitialized)
 		{
-			System.out.println("Initializing view service...");
+			System.out.println("ViewServiceImpl: Initializing view service...");
 			guiThread = new GUIThread();
 			guiThread.start();
 			viewInitialized = true;
 		}
 		else
 		{
-			System.out.println("View already initialized!");
+			System.out.println("ViewServiceImpl: View already initialized!");
 		}
 	}
 	

@@ -11,9 +11,9 @@ public class GUIThread extends Thread
 	public void run()
 	{
 		running = true;
-		System.out.println("Pre_launch");
+		System.out.println("JavaFX Application: pre launch");
 		Application.launch(MainWindow.class, "");
-		System.out.println("Past_launch");
+		System.out.println("JavaFX Application: past launch");
 		running = false;
 	}
 	
