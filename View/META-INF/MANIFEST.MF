@@ -11,3 +11,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: jfxrt.jar,
  .
 Export-Package: cz.kofron.storage.view.service
+Require-Bundle: cz.kofron.storage.control;bundle-version="1.0.0"
