@@ -8,7 +8,8 @@ import cz.kofron.storage.view.service.IViewService;
 
 public class ViewServiceTracker extends ServiceTracker implements Runnable
 {
-	private final static int WAIT_TIMEOUT_MS = 1000;
+	private final static int WAIT_TIMEOUT_MS = 500;
+	private final static int SLEEP_TIMEOUT_MS = 1000;
 	private IViewService currentService;
 	
 	public ViewServiceTracker(BundleContext context)
@@ -76,9 +77,11 @@ public class ViewServiceTracker extends ServiceTracker implements Runnable
 					AppRun.onViewAvailable((IViewService) service);
 					break;
 				}
+				Thread.sleep(SLEEP_TIMEOUT_MS);
 			}
 			catch (InterruptedException e)
 			{
+				e.printStackTrace();
 			}
 		}
 	}

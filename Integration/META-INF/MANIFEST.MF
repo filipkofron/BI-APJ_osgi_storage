@@ -1,11 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Model
-Bundle-SymbolicName: cz.kofron.storage.model
+Bundle-Name: Integration
+Bundle-SymbolicName: cz.kofron.storage.integration
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: cz.kofron.storage.model.Activator
+Bundle-Activator: cz.kofron.storage.integration.Activator
 Bundle-Vendor: Filip Kofron
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: cz.kofron.storage.model.entity
+Export-Package: cz.kofron.storage.integration.dao,
+ cz.kofron.storage.integration.service
