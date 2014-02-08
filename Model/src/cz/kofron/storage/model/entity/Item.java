@@ -5,11 +5,6 @@ import java.io.Serializable;
 public class Item extends AbstractEntity implements Serializable
 {
 
-	public Item(int id)
-	{
-		super(id);
-	}
-
 	public Item(int id, long timeAdded, String info, int groupId, int addedBy)
 	{
 		super(id);

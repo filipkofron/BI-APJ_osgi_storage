@@ -9,4 +9,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: Filip Kofron
 Export-Package: cz.kofron.storage.business.service
-Require-Bundle: cz.kofron.storage.model;bundle-version="1.0.0"
+Require-Bundle: cz.kofron.storage.model;bundle-version="1.0.0",
+ cz.kofron.storage.integration;bundle-version="1.0.0"

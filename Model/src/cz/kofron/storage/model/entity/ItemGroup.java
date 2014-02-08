@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 public class ItemGroup extends AbstractEntity implements Serializable
 {
-	public ItemGroup(int id)
+	
+	public ItemGroup(int id, String name, String description)
 	{
 		super(id);
+		this.name = name;
+		this.description = description;
 	}
 	/**
 	 * Generated serial ID.

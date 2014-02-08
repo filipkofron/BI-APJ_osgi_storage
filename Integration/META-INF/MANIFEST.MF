@@ -10,3 +10,4 @@ Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: cz.kofron.storage.integration.dao,
  cz.kofron.storage.integration.service
+Require-Bundle: cz.kofron.storage.model;bundle-version="1.0.0"

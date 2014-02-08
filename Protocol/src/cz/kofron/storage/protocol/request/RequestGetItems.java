@@ -3,6 +3,8 @@ package cz.kofron.storage.protocol.request;
 import java.io.Serializable;
 
 import cz.kofron.storage.business.service.IStorageFacadeService;
+import cz.kofron.storage.protocol.response.ResponseItems;
+import cz.kofron.storage.protocol.service.IResponseService;
 
 public class RequestGetItems extends Request implements Serializable
 {
@@ -25,8 +27,8 @@ public class RequestGetItems extends Request implements Serializable
 	}
 	
 	@Override
-	public void execute(IStorageFacadeService facade)
+	public void execute(IStorageFacadeService facade, IResponseService responseService)
 	{
-		facade.getItems(groupId);
+		responseService.sendResponse(new ResponseItems(facade.getItems(groupId)));
 	}
 }

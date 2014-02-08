@@ -4,12 +4,13 @@ import java.io.Serializable;
 
 import cz.kofron.storage.business.service.IStorageFacadeService;
 import cz.kofron.storage.model.entity.ItemGroup;
+import cz.kofron.storage.protocol.response.ResponseBoolean;
+import cz.kofron.storage.protocol.service.IResponseService;
 
 public class RequestItemGroup extends Request implements Serializable
 {
 	public enum Operation
 	{
-		ADD,
 		REMOVE,
 		UPDATE
 	}
@@ -33,18 +34,15 @@ public class RequestItemGroup extends Request implements Serializable
 	}
 	
 	@Override
-	public void execute(IStorageFacadeService facade)
+	public void execute(IStorageFacadeService facade, IResponseService responseService)
 	{
 		switch(type)
 		{
-			case ADD:
-				facade.addItemGroup(itemGroup);
-				break;
 			case REMOVE:
-				facade.removeItemGroup(itemGroup);
+				responseService.sendResponse(new ResponseBoolean(facade.removeItemGroup(itemGroup)));
 				break;
 			case UPDATE:
-				facade.updateItemGroup(itemGroup);
+				responseService.sendResponse(new ResponseBoolean(facade.updateItemGroup(itemGroup)));
 				break;
 		}
 	}
