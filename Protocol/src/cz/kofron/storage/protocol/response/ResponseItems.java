@@ -13,7 +13,7 @@ public class ResponseItems extends Response implements Serializable
 	 */
 	private static final long serialVersionUID = -2756638475764035595L;
 	private ArrayList<Item> items;
-	
+
 	public ResponseItems(ArrayList<Item> items)
 	{
 		this.items = items;

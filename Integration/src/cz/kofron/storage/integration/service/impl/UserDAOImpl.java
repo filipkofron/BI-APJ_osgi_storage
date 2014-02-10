@@ -8,7 +8,7 @@ import cz.kofron.storage.model.entity.User;
 public class UserDAOImpl implements UserDAO
 {
 	private static Integer id = new Integer(0);
-	
+
 	public static int getUniqId()
 	{
 		synchronized (id)
@@ -16,9 +16,9 @@ public class UserDAOImpl implements UserDAO
 			return id++;
 		}
 	}
-	
+
 	private ArrayList<User> users = new ArrayList<>();
-	
+
 	public UserDAOImpl()
 	{
 		User testUser = new User(getUniqId(), "pepa", "", "sock from_hell 666");
@@ -29,9 +29,9 @@ public class UserDAOImpl implements UserDAO
 	@Override
 	public User getUserByName(String name)
 	{
-		for(User user : users)
+		for (User user : users)
 		{
-			if(user.getUsername().equals(name))
+			if (user.getUsername().equals(name))
 			{
 				return user;
 			}

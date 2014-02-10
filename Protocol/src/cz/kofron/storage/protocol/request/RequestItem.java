@@ -2,7 +2,7 @@ package cz.kofron.storage.protocol.request;
 
 import java.io.Serializable;
 
-import cz.kofron.storage.business.service.IStorageFacadeService;
+import cz.kofron.storage.business.facade.StorageFacade;
 import cz.kofron.storage.model.entity.Item;
 import cz.kofron.storage.protocol.response.ResponseBoolean;
 import cz.kofron.storage.protocol.service.IResponseService;
@@ -11,10 +11,9 @@ public class RequestItem extends Request implements Serializable
 {
 	public enum Operation
 	{
-		REMOVE,
-		UPDATE
+		REMOVE, UPDATE
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -33,22 +32,25 @@ public class RequestItem extends Request implements Serializable
 	{
 		return item;
 	}
-	
+
 	public Operation getType()
 	{
 		return type;
 	}
 
 	@Override
-	public void execute(IStorageFacadeService facade, IResponseService responseService)
+	public void execute(StorageFacade facade,
+			IResponseService responseService)
 	{
-		switch(type)
+		switch (type)
 		{
 			case REMOVE:
-				responseService.sendResponse(new ResponseBoolean(facade.removeItem(item)));
+				responseService.sendResponse(new ResponseBoolean(facade
+						.removeItem(item)));
 				break;
 			case UPDATE:
-				responseService.sendResponse(new ResponseBoolean(facade.updateItem(item)));
+				responseService.sendResponse(new ResponseBoolean(facade
+						.updateItem(item)));
 				break;
 		}
 	}

@@ -9,33 +9,36 @@ import cz.kofron.storage.integration.service.impl.DefaultDAOFactoryService;
 
 public abstract class DAOFactoryService
 {
-	private final static Logger log = Logger.getLogger(DAOFactoryService.class.getName());
-	
+	private final static Logger log = Logger.getLogger(DAOFactoryService.class
+			.getName());
+
 	private static DAOFactoryService instance;
-	
+
 	public abstract ItemDAO getItemDAO();
+
 	public abstract ItemGroupDAO getItemGroupDAO();
+
 	public abstract UserDAO getUserDAO();
-	
+
 	private static DAOFactoryService retrieveService()
 	{
-		
+
 		return null;
 	}
-	
+
 	public static DAOFactoryService getInstance()
 	{
-		if(instance == null)
+		if (instance == null)
 		{
 			instance = retrieveService();
 		}
-		
-		if(instance == null)
+
+		if (instance == null)
 		{
 			log.warning("DAO implementation service not found, using default!");
 			instance = new DefaultDAOFactoryService();
 		}
-		
+
 		return instance;
 	}
 }

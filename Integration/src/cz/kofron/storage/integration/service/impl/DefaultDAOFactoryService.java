@@ -10,38 +10,38 @@ public class DefaultDAOFactoryService extends DAOFactoryService
 	private ItemDAO itemDAO;
 	private ItemGroupDAO itemGroupDAO;
 	private UserDAO userDAO;
-	
+
 	@Override
 	public ItemDAO getItemDAO()
 	{
-		if(itemDAO == null)
+		if (itemDAO == null)
 		{
 			itemDAO = new ItemDAOImpl();
 		}
-		
+
 		return itemDAO;
 	}
 
 	@Override
 	public ItemGroupDAO getItemGroupDAO()
 	{
-		if(itemGroupDAO == null)
+		if (itemGroupDAO == null)
 		{
 			itemGroupDAO = new ItemGroupDAOImpl();
 		}
-		
+
 		return itemGroupDAO;
 	}
 
 	@Override
 	public UserDAO getUserDAO()
 	{
-		if(userDAO == null)
+		if (userDAO == null)
 		{
 			userDAO = new UserDAOImpl();
 		}
-		
+
 		return userDAO;
 	}
-	
+
 }

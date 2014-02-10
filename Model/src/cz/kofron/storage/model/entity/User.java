@@ -9,6 +9,7 @@ public class User extends AbstractEntity implements Serializable
 	 * Generated serial ID.
 	 */
 	private static final long serialVersionUID = 5355158272592041645L;
+
 	public User(int id, String username, String hash, String salt)
 	{
 		super(id);
@@ -20,23 +21,29 @@ public class User extends AbstractEntity implements Serializable
 	private String username;
 	private String hash;
 	private String salt;
-	
-	public static String sha256(String base) {
-	    try{
-	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-	        byte[] hash = digest.digest(base.getBytes("UTF-8"));
-	        StringBuffer hexString = new StringBuffer();
 
-	        for (int i = 0; i < hash.length; i++) {
-	            String hex = Integer.toHexString(0xff & hash[i]);
-	            if(hex.length() == 1) hexString.append('0');
-	            hexString.append(hex);
-	        }
+	public static String sha256(String base)
+	{
+		try
+		{
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(base.getBytes("UTF-8"));
+			StringBuffer hexString = new StringBuffer();
 
-	        return hexString.toString();
-	    } catch(Exception ex){
-	       throw new RuntimeException(ex);
-	    }
+			for (int i = 0; i < hash.length; i++)
+			{
+				String hex = Integer.toHexString(0xff & hash[i]);
+				if (hex.length() == 1)
+					hexString.append('0');
+				hexString.append(hex);
+			}
+
+			return hexString.toString();
+		}
+		catch (Exception ex)
+		{
+			throw new RuntimeException(ex);
+		}
 	}
 
 	public String getUsername()
@@ -68,12 +75,12 @@ public class User extends AbstractEntity implements Serializable
 	{
 		this.salt = salt;
 	}
-	
+
 	private String calcHash(String pass)
 	{
 		return sha256(salt + username + pass + salt);
 	}
-	
+
 	public boolean checkPassword(String pass)
 	{
 		return hash.equals(calcHash(pass));

@@ -6,7 +6,7 @@ import javafx.application.Platform;
 public class GUIThread extends Thread
 {
 	private boolean running = false;
-	
+
 	@Override
 	public void run()
 	{
@@ -16,10 +16,10 @@ public class GUIThread extends Thread
 		System.out.println("JavaFX Application: past launch");
 		running = false;
 	}
-	
+
 	public void stopGUI()
 	{
-		if(running)
+		if (running)
 		{
 			Platform.exit();
 		}

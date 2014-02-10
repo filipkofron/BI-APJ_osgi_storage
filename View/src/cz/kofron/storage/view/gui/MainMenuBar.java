@@ -6,6 +6,6 @@ public class MainMenuBar extends MenuBar
 {
 	public MainMenuBar()
 	{
-		
+
 	}
 }

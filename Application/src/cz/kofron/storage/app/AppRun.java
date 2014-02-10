@@ -11,20 +11,20 @@ public class AppRun
 	{
 		private boolean running = true;
 		private IViewService viewService;
-		
+
 		public AppThread(IViewService viewService)
 		{
 			this.viewService = viewService;
 		}
-		
+
 		@Override
 		public void run()
 		{
-			while(running)
+			while (running)
 			{
 				System.out.println("AppThread: Starting view ..");
 				viewService.initializeView();
-				
+
 				try
 				{
 					synchronized (this)
@@ -39,7 +39,7 @@ public class AppRun
 			System.out.println("AppThread: Destroying view ..");
 			viewService.destroyView();
 		}
-		
+
 		public void stopApp()
 		{
 			synchronized (this)
@@ -48,32 +48,32 @@ public class AppRun
 				notifyAll();
 			}
 		}
-		
+
 		public IViewService getViewService()
 		{
 			return viewService;
 		}
 	}
-	
+
 	private static AppThread thread;
-	private static Lock lock = new ReentrantLock(); 
-	
+	private static Lock lock = new ReentrantLock();
+
 	public static void onViewAvailable(IViewService viewService)
 	{
 		System.out.println("AppThread: A view became available.");
 		lock.lock();
-		if(thread == null)
+		if (thread == null)
 		{
 			thread = new AppThread(viewService);
 			thread.start();
 		}
 		lock.unlock();
 	}
-	
+
 	public static void onViewLost(IViewService viewService)
 	{
 		lock.lock();
-		if(thread != null)
+		if (thread != null)
 		{
 			thread.stopApp();
 			thread = null;

@@ -22,41 +22,44 @@ public class Item extends AbstractEntity implements Serializable
 	private String info;
 	private int groupId;
 	private int addedBy;
-	
+
 	public long getTimeAdded()
 	{
 		return timeAdded;
 	}
+
 	public void setTimeAdded(long timeAdded)
 	{
 		this.timeAdded = timeAdded;
 	}
+
 	public String getInfo()
 	{
 		return info;
 	}
+
 	public void setInfo(String info)
 	{
 		this.info = info;
 	}
-	
+
 	public int getGroupId()
 	{
 		return groupId;
 	}
-	
+
 	public void setGroupId(int groupId)
 	{
 		this.groupId = groupId;
 	}
-	
+
 	public int getAddedBy()
 	{
 		return addedBy;
 	}
-	
+
 	public void setAddedBy(int addedBy)
 	{
 		this.addedBy = addedBy;
-	}	
+	}
 }

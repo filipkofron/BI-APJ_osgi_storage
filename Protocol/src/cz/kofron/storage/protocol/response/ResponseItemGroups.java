@@ -12,7 +12,7 @@ public class ResponseItemGroups extends Response
 	 */
 	private static final long serialVersionUID = -6360606270984704719L;
 	private ArrayList<ItemGroup> itemGroups;
-	
+
 	public ResponseItemGroups(ArrayList<ItemGroup> itemGroups)
 	{
 		this.itemGroups = itemGroups;

@@ -16,9 +16,15 @@ public class ItemGroupDAOImpl implements ItemGroupDAO
 			return id++;
 		}
 	}
-	
+
 	private ArrayList<ItemGroup> itemGroups = new ArrayList<>();
-	
+
+	public ItemGroupDAOImpl()
+	{
+		itemGroups.add(new ItemGroup(getUniqId(), "Some item",
+				"this is a simple item description"));
+	}
+
 	@Override
 	public ItemGroup addItemGroup(String name, String description)
 	{
@@ -31,15 +37,15 @@ public class ItemGroupDAOImpl implements ItemGroupDAO
 	public boolean removeItemGroup(ItemGroup itemGroup)
 	{
 		ItemGroup toRemove = null;
-		for(ItemGroup it : itemGroups)
+		for (ItemGroup it : itemGroups)
 		{
-			if(it.getId() == itemGroup.getId())
+			if (it.getId() == itemGroup.getId())
 			{
 				toRemove = it;
 				break;
 			}
 		}
-		if(toRemove != null)
+		if (toRemove != null)
 		{
 			itemGroups.remove(toRemove);
 			return true;
@@ -51,15 +57,15 @@ public class ItemGroupDAOImpl implements ItemGroupDAO
 	public boolean updateItemGroup(ItemGroup itemGroup)
 	{
 		ItemGroup toUpdate = null;
-		for(ItemGroup it : itemGroups)
+		for (ItemGroup it : itemGroups)
 		{
-			if(it.getId() == itemGroup.getId())
+			if (it.getId() == itemGroup.getId())
 			{
 				toUpdate = it;
 				break;
 			}
 		}
-		if(toUpdate != null)
+		if (toUpdate != null)
 		{
 			itemGroups.remove(toUpdate);
 			itemGroups.add(itemGroup);

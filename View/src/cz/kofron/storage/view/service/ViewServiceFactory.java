@@ -11,12 +11,14 @@ public class ViewServiceFactory implements ServiceFactory
 	@Override
 	public Object getService(Bundle bundle, ServiceRegistration registration)
 	{
-		System.out.println("ViewServiceFactory: Creating service implementation!");
+		System.out
+				.println("ViewServiceFactory: Creating service implementation!");
 		return new ViewServiceImpl();
 	}
-	
+
 	@Override
-	public void ungetService(Bundle bundle, ServiceRegistration registration, Object service)
+	public void ungetService(Bundle bundle, ServiceRegistration registration,
+			Object service)
 	{
 		System.out.println("ViewServiceFactory: Service ceased usage!");
 		((ViewServiceImpl) service).destroyView();

@@ -7,10 +7,10 @@ public class ViewServiceImpl implements IViewService
 {
 	private boolean viewInitialized = false;
 	private GUIThread guiThread = new GUIThread();
-	
+
 	public void initializeView()
-	{		
-		if(!viewInitialized)
+	{
+		if (!viewInitialized)
 		{
 			System.out.println("ViewServiceImpl: Initializing view service...");
 			guiThread = new GUIThread();
@@ -22,12 +22,13 @@ public class ViewServiceImpl implements IViewService
 			System.out.println("ViewServiceImpl: View already initialized!");
 		}
 	}
-	
+
 	public void destroyView()
 	{
-		System.out.println("ViewServiceImpl: destroyView(): Should destroy view stuff.");
+		System.out
+				.println("ViewServiceImpl: destroyView(): Should destroy view stuff.");
 
-		if(viewInitialized)
+		if (viewInitialized)
 		{
 			System.out.println("ViewServiceImpl: Stopping view service...");
 			guiThread.stopGUI();

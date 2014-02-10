@@ -17,9 +17,17 @@ public class ItemDAOImpl implements ItemDAO
 			return id++;
 		}
 	}
-	
+
 	private ArrayList<Item> items = new ArrayList<Item>();
-	
+
+	public ItemDAOImpl()
+	{
+		items.add(new Item(getUniqId(), System.currentTimeMillis(), "none", 0,
+				0));
+		items.add(new Item(getUniqId(), System.currentTimeMillis(), "neco", 0,
+				0));
+	}
+
 	@Override
 	public Item addItem(long timeAdded, String info, int groupId, int addedBy)
 	{
@@ -32,15 +40,15 @@ public class ItemDAOImpl implements ItemDAO
 	public boolean removeItem(Item item)
 	{
 		Item toRemove = null;
-		for(Item it : items)
+		for (Item it : items)
 		{
-			if(it.getId() == item.getId())
+			if (it.getId() == item.getId())
 			{
 				toRemove = it;
 				break;
 			}
 		}
-		if(toRemove != null)
+		if (toRemove != null)
 		{
 			items.remove(toRemove);
 			return true;
@@ -52,15 +60,15 @@ public class ItemDAOImpl implements ItemDAO
 	public boolean updateItem(Item item)
 	{
 		Item toUpdate = null;
-		for(Item it : items)
+		for (Item it : items)
 		{
-			if(it.getId() == item.getId())
+			if (it.getId() == item.getId())
 			{
 				toUpdate = it;
 				break;
 			}
 		}
-		if(toUpdate != null)
+		if (toUpdate != null)
 		{
 			items.remove(toUpdate);
 			items.add(item);
