@@ -1,6 +1,7 @@
 package cz.kofron.storage.integration.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import cz.kofron.storage.integration.dao.ItemDAO;
 import cz.kofron.storage.model.entity.Item;
@@ -22,16 +23,21 @@ public class ItemDAOImpl implements ItemDAO
 
 	public ItemDAOImpl()
 	{
-		items.add(new Item(getUniqId(), System.currentTimeMillis(), "none", 0,
-				0));
-		items.add(new Item(getUniqId(), System.currentTimeMillis(), "neco", 0,
-				0));
+		items.add(new Item(getUniqId(), System.currentTimeMillis(), "none", 0, 0));
+		items.add(new Item(getUniqId(), System.currentTimeMillis(), "neco", 0, 0));
 	}
 
 	@Override
 	public Item addItem(long timeAdded, String info, int groupId, int addedBy)
 	{
 		Item item = new Item(getUniqId(), timeAdded, info, groupId, addedBy);
+		for (Item it : items)
+		{
+			if (it.getGroupId() == groupId && it.getInfo().equals(info))
+			{
+				return null;
+			}
+		}
 		items.add(item);
 		return item;
 	}
@@ -80,6 +86,21 @@ public class ItemDAOImpl implements ItemDAO
 	@Override
 	public ArrayList<Item> getItems(int groupId)
 	{
-		return new ArrayList<Item>(items);
+		ArrayList<Item> ret = new ArrayList<Item>();
+		for (Item item : items)
+		{
+			if (item.getGroupId() == groupId)
+			{
+				ret.add(item);
+			}
+		}
+		ret.sort(new Comparator<Item>()
+		{
+			public int compare(Item a, Item b)
+			{
+				return a.getInfo().compareTo(b.getInfo());
+			};
+		});
+		return ret;
 	}
 }

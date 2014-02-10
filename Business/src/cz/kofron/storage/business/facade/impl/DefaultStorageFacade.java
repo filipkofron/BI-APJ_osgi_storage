@@ -76,4 +76,10 @@ public class DefaultStorageFacade extends StorageFacade
 		return user.checkPassword(password);
 	}
 
+	@Override
+	public ArrayList<User> getUsers()
+	{
+		return DAOFactoryService.getInstance().getUserDAO().getUsers();
+	}
+
 }

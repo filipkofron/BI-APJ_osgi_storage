@@ -1,7 +1,7 @@
 package cz.kofron.storage.view.gui;
 
+import cz.kofron.storage.model.entity.ItemGroup;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +18,7 @@ public class ItemGroupDetail extends GridPane
 	private Button addButton;
 	private Button saveButton;
 	private ActionHandler eventHandler;
-	private int itemId;
+	private Integer itemGroupId = null;
 
 	public ItemGroupDetail(ActionHandler eventHandler)
 	{
@@ -60,11 +60,6 @@ public class ItemGroupDetail extends GridPane
 		add(addButton, 2, 4, 1, 1);
 	}
 
-	public int getItemGroupId()
-	{
-		return itemId;
-	}
-
 	public String getItemGroupName()
 	{
 		return nameTextField.getText();
@@ -73,5 +68,22 @@ public class ItemGroupDetail extends GridPane
 	public String getItemGroupDescription()
 	{
 		return descTextArea.getText();
+	}
+	
+	public Integer getItemGroupId()
+	{
+		return itemGroupId;
+	}
+	
+	public void setItemGroupId(Integer itemGroupId)
+	{
+		this.itemGroupId = itemGroupId;
+	}
+	
+	public void update(ItemGroup itemGroup)
+	{
+		itemGroupId = itemGroup.getId();
+		nameTextField.setText(itemGroup.getName());
+		descTextArea.setText(itemGroup.getDescription());
 	}
 }

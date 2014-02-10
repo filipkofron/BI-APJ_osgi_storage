@@ -38,4 +38,10 @@ public class UserDAOImpl implements UserDAO
 		}
 		return null;
 	}
+
+	@Override
+	public ArrayList<User> getUsers()
+	{
+		return new ArrayList<User>(users);
+	}
 }

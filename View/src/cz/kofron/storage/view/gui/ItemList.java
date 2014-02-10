@@ -18,7 +18,7 @@ public class ItemList extends ListView<String>
 		{
 			for(Item item : itemsToShow)
 			{
-				items.add(item.toString());
+				items.add("[" + item.getId() + "] " + item.getInfo());
 			}
 		}
 		setItems(items);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cz.kofron.storage.model.entity.Item;
 import cz.kofron.storage.model.entity.ItemGroup;
+import cz.kofron.storage.model.entity.User;
 
 public abstract class StorageFacade
 {
@@ -23,5 +24,7 @@ public abstract class StorageFacade
 
 	public abstract ArrayList<Item> getItems(int groupId);
 
+	public abstract ArrayList<User> getUsers();
+	
 	public abstract boolean login(String username, String password);
 }

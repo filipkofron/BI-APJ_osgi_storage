@@ -14,8 +14,10 @@ public class MainWindow extends Application
 	private ItemDetail itemDetail;
 	private ItemGroupList itemGroupList;
 	private ItemGroupDetail itemGroupDetail;
-	private ActionHandler eventHandler;
+	private ActionHandler actionHandler;
 
+	private ContentUpdater contentUpdater;
+	
 	private void prepareMakeMenuBar()
 	{
 		mainMenuBar = new MainMenuBar();
@@ -33,12 +35,12 @@ public class MainWindow extends Application
 	
 	private void prepareItemGroupList()
 	{
-		itemGroupList = new ItemGroupList();
+		itemGroupList = new ItemGroupList(actionHandler);
 	}
 
 	private void prepareItemGroupDetail()
 	{
-		itemGroupDetail = new ItemGroupDetail(eventHandler);
+		itemGroupDetail = new ItemGroupDetail(actionHandler);
 	}
 
 	private Scene createScene()
@@ -97,9 +99,20 @@ public class MainWindow extends Application
 	@Override
 	public void start(Stage stage) throws Exception
 	{
-		eventHandler = new ActionHandler(this);
+		actionHandler = new ActionHandler(this);
 		stage.setScene(createScene());
+		
+		contentUpdater = new ContentUpdater(this);
+		contentUpdater.refreshAfterWhile(1500, ContentUpdater.ALL);
+		contentUpdater.start();
 		stage.show();
+	}
+	
+	@Override
+	public void stop() throws Exception
+	{
+		contentUpdater.setStopped(true);
+		super.stop();
 	}
 
 	public MainMenuBar getMainMenuBar()
@@ -126,6 +139,9 @@ public class MainWindow extends Application
 	{
 		return itemGroupDetail;
 	}
-
 	
+	public ContentUpdater getContentUpdater()
+	{
+		return contentUpdater;
+	}
 }

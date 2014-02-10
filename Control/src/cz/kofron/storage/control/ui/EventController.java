@@ -11,32 +11,32 @@ public class EventController
 		 booleanCallBack.call(StorageFacadeFactory.getInstance().addItemGroup(name, description) != null);
 	}
 
-	public static void removeItemGroup(ItemGroup itemGroup, IBooleanCallBack booleanCallBack)
+	public static void onRemoveItemGroup(ItemGroup itemGroup, IBooleanCallBack booleanCallBack)
 	{
 		booleanCallBack.call(StorageFacadeFactory.getInstance().removeItemGroup(itemGroup));
 	}
 
-	public static void updateItemGroup(ItemGroup itemGroup, IBooleanCallBack booleanCallBack)
+	public static void onUpdateItemGroup(ItemGroup itemGroup, IBooleanCallBack booleanCallBack)
 	{
 		booleanCallBack.call(StorageFacadeFactory.getInstance().updateItemGroup(itemGroup));
 	}
 
-	public static void addItem(long timeAdded, String info, int groupId, int addedBy, IBooleanCallBack booleanCallBack)
+	public static void onAddItem(long timeAdded, String info, int groupId, int addedBy, IBooleanCallBack booleanCallBack)
 	{
 		booleanCallBack.call(StorageFacadeFactory.getInstance().addItem(timeAdded, info, groupId, addedBy) != null);
 	}
 
-	public static void removeItem(Item item, IBooleanCallBack booleanCallBack)
+	public static void onRemoveItem(Item item, IBooleanCallBack booleanCallBack)
 	{
 		booleanCallBack.call(StorageFacadeFactory.getInstance().removeItem(item));
 	}
 
-	public static void updateItem(Item item, IBooleanCallBack booleanCallBack)
+	public static void onUpdateItem(Item item, IBooleanCallBack booleanCallBack)
 	{
 		booleanCallBack.call(StorageFacadeFactory.getInstance().updateItem(item));
 	}
 
-	public static void login(String username, String password, IBooleanCallBack booleanCallBack)
+	public static void onLogin(String username, String password, IBooleanCallBack booleanCallBack)
 	{
 		booleanCallBack.call(StorageFacadeFactory.getInstance().login(username, password));
 	}

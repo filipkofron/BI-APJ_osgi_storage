@@ -1,8 +1,11 @@
 package cz.kofron.storage.integration.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import cz.kofron.storage.integration.dao.ItemGroupDAO;
+import cz.kofron.storage.integration.service.DAOFactoryService;
+import cz.kofron.storage.model.entity.Item;
 import cz.kofron.storage.model.entity.ItemGroup;
 
 public class ItemGroupDAOImpl implements ItemGroupDAO
@@ -21,13 +24,20 @@ public class ItemGroupDAOImpl implements ItemGroupDAO
 
 	public ItemGroupDAOImpl()
 	{
-		itemGroups.add(new ItemGroup(getUniqId(), "Some item",
-				"this is a simple item description"));
+		itemGroups.add(new ItemGroup(getUniqId(), "A group", "this is a simple group description"));
+		itemGroups.add(new ItemGroup(getUniqId(), "Another group", "this is another simple group description"));
 	}
 
 	@Override
 	public ItemGroup addItemGroup(String name, String description)
 	{
+		for (ItemGroup it : itemGroups)
+		{
+			if (it.getName().equals(name))
+			{
+				return null;
+			}
+		}
 		ItemGroup group = new ItemGroup(getUniqId(), name, description);
 		itemGroups.add(group);
 		return group;
@@ -47,6 +57,11 @@ public class ItemGroupDAOImpl implements ItemGroupDAO
 		}
 		if (toRemove != null)
 		{
+			ArrayList<Item> items = DAOFactoryService.getInstance().getItemDAO().getItems(toRemove.getId());
+			for (Item item : items)
+			{
+				DAOFactoryService.getInstance().getItemDAO().removeItem(item);
+			}
 			itemGroups.remove(toRemove);
 			return true;
 		}
@@ -77,7 +92,16 @@ public class ItemGroupDAOImpl implements ItemGroupDAO
 	@Override
 	public ArrayList<ItemGroup> getItemGroups()
 	{
-		return new ArrayList<ItemGroup>(itemGroups);
+		ArrayList<ItemGroup> ret = new ArrayList<ItemGroup>(itemGroups);
+
+		ret.sort(new Comparator<ItemGroup>()
+		{
+			public int compare(ItemGroup a, ItemGroup b)
+			{
+				return a.getName().compareTo(b.getName());
+			};
+		});
+		return ret;
 	}
 
 }
