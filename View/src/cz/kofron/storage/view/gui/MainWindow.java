@@ -1,7 +1,5 @@
 package cz.kofron.storage.view.gui;
 
-import cz.kofron.storage.business.facade.StorageFacade;
-import cz.kofron.storage.business.facade.StorageFacadeFactory;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
@@ -24,7 +22,7 @@ public class MainWindow extends Application
 	
 	private void prepareMakeMenuBar()
 	{
-		mainMenuBar = new MainMenuBar();
+		mainMenuBar = new MainMenuBar(actionHandler);
 	}
 
 	private void prepareItemList()

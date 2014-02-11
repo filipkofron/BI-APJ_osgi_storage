@@ -1,5 +1,6 @@
 package cz.kofron.storage.view.gui;
 
+import javafx.application.Platform;
 import cz.kofron.storage.control.ui.EventController;
 import cz.kofron.storage.control.ui.IBooleanCallBack;
 import cz.kofron.storage.model.entity.Item;
@@ -181,6 +182,15 @@ public class ActionHandler
 				mainWindow.getContentUpdater().refresh(ContentUpdater.ITEM_LIST | ContentUpdater.ITEM_DETAILS);
 			}
 		});
-
+	}
+	
+	public void onRefresh()
+	{
+		mainWindow.getContentUpdater().refresh(ContentUpdater.ALL);
+	}
+	
+	public void onExit()
+	{
+		Platform.exit();
 	}
 }

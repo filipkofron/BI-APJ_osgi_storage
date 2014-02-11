@@ -65,18 +65,25 @@ public class ContentUpdater extends Thread
 				
 				if(!mainWindow.isLogged())
 				{
-					mainWindow.setLogged(StorageFacadeFactory.getInstance().login("pepa", "zdepa"));
-					if(!mainWindow.isLogged())
+					try
 					{
-						Platform.runLater(new Runnable()
+						mainWindow.setLogged(StorageFacadeFactory.getInstance().login("pepa", "zdepa"));
+						if(!mainWindow.isLogged())
 						{
-							@Override
-							public void run()
+							Platform.runLater(new Runnable()
 							{
-								MessageBox.show("Couldn't log in.", 666, null);
-							}
-						});
-						continue;
+								@Override
+								public void run()
+								{
+									MessageBox.show("Couldn't log in.", 666, null);
+								}
+							});
+							continue;
+						}
+					}
+					catch(Exception e)
+					{
+						e.printStackTrace();
 					}
 				}
 				

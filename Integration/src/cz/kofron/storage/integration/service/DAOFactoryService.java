@@ -2,6 +2,7 @@ package cz.kofron.storage.integration.service;
 
 import java.util.logging.Logger;
 
+import cz.kofron.storage.integration.Activator;
 import cz.kofron.storage.integration.dao.ItemDAO;
 import cz.kofron.storage.integration.dao.ItemGroupDAO;
 import cz.kofron.storage.integration.dao.UserDAO;
@@ -22,7 +23,10 @@ public abstract class DAOFactoryService
 
 	private static DAOFactoryService retrieveService()
 	{
-
+		if(Activator.getDaoFactoryServiceTracker() != null)
+		{
+			return (DAOFactoryService) Activator.getDaoFactoryServiceTracker().getService();
+		}
 		return null;
 	}
 

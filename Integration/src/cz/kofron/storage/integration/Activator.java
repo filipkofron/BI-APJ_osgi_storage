@@ -7,6 +7,7 @@ public class Activator implements BundleActivator
 {
 
 	private static BundleContext context;
+	private static DAOFactoryServiceTracker daoFactoryServiceTracker;
 
 	static BundleContext getContext()
 	{
@@ -23,6 +24,8 @@ public class Activator implements BundleActivator
 	public void start(BundleContext bundleContext) throws Exception
 	{
 		Activator.context = bundleContext;
+		daoFactoryServiceTracker = new DAOFactoryServiceTracker(bundleContext);
+		daoFactoryServiceTracker.open();
 	}
 
 	/*
@@ -36,4 +39,8 @@ public class Activator implements BundleActivator
 		Activator.context = null;
 	}
 
+	public static DAOFactoryServiceTracker getDaoFactoryServiceTracker()
+	{
+		return daoFactoryServiceTracker;
+	}
 }
