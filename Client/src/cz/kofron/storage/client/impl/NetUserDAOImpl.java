@@ -6,6 +6,8 @@ import cz.kofron.storage.client.net.Client;
 import cz.kofron.storage.integration.dao.UserDAO;
 import cz.kofron.storage.model.entity.User;
 import cz.kofron.storage.protocol.request.RequestGetUsers;
+import cz.kofron.storage.protocol.request.RequestLogin;
+import cz.kofron.storage.protocol.response.ResponseBoolean;
 import cz.kofron.storage.protocol.response.ResponseUsers;
 
 public class NetUserDAOImpl implements UserDAO
@@ -38,5 +40,13 @@ public class NetUserDAOImpl implements UserDAO
 	{
 		ResponseUsers users = (ResponseUsers) client.communicate(new RequestGetUsers());
 		return users.getUsers();
+	}
+
+	@Override
+	public boolean login(String username, String password)
+	{
+		ResponseBoolean responseBoolean = (ResponseBoolean) client.communicate(new RequestLogin(username, password));
+		
+		return responseBoolean.getValue();
 	}
 }

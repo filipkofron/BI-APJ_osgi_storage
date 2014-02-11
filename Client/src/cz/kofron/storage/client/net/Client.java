@@ -25,7 +25,7 @@ public class Client
 	public void connect() throws UnknownHostException, IOException
 	{
 		socket = new Socket("127.0.0.1", 1234);
-		socket.setSoTimeout(60 * 60);
+		socket.setSoTimeout(1000 * 60 * 60);
 		objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 		objectInputStream = new ObjectInputStream(socket.getInputStream());
 		log.info("Client connected to server");

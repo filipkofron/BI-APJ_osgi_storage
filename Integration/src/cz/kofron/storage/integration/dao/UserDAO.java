@@ -8,4 +8,5 @@ public interface UserDAO
 {
 	public User getUserByName(String name);
 	public ArrayList<User> getUsers();
+	public boolean login(String username, String password);
 }

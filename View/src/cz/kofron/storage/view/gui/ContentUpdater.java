@@ -14,30 +14,30 @@ public class ContentUpdater extends Thread
 	public final static int ITEM_GROUP_DETAILS = 0x0002;
 	public final static int ITEM_LIST = 0x0004;
 	public final static int ITEM_DETAILS = 0x0008;
-	
+
 	public final static int ALL = 0x000F;
-	
+
 	private boolean stopped = false;
 	private boolean job = false;
 	private long sleepLength = 0;
 	private int updateFlags = 0;
 	private MainWindow mainWindow;
-	
+
 	public ContentUpdater(MainWindow mainWindow)
 	{
 		this.mainWindow = mainWindow;
 	}
-	
+
 	@Override
 	public void run()
 	{
-		while(!stopped)
+		while (!stopped)
 		{
 			synchronized (this)
 			{
 				try
 				{
-					if(!job)
+					if (!job)
 					{
 						wait();
 					}
@@ -51,24 +51,24 @@ public class ContentUpdater extends Thread
 				}
 				long sleepNow = sleepLength;
 				sleepLength = 0;
-				if(sleepLength > 0)
+				if (sleepLength > 0)
 				{
 					try
 					{
-						
+
 						Thread.sleep(sleepNow);
 					}
 					catch (InterruptedException e)
 					{
 					}
 				}
-				
-				if(!mainWindow.isLogged())
+
+				if (!mainWindow.isLogged())
 				{
 					try
 					{
 						mainWindow.setLogged(StorageFacadeFactory.getInstance().login("pepa", "zdepa"));
-						if(!mainWindow.isLogged())
+						if (!mainWindow.isLogged())
 						{
 							Platform.runLater(new Runnable()
 							{
@@ -81,45 +81,48 @@ public class ContentUpdater extends Thread
 							continue;
 						}
 					}
-					catch(Exception e)
+					catch (Exception e)
 					{
 						e.printStackTrace();
 					}
 				}
-				
-				Platform.runLater(new Runnable()
+				else
 				{
-					@Override
-					public void run()
+
+					Platform.runLater(new Runnable()
 					{
-						doRefresh();
-					}
-				});
+						@Override
+						public void run()
+						{
+							doRefresh();
+						}
+					});
+				}
 			}
 		}
 	}
-	
+
 	private void doRefresh()
 	{
 		Collection<ItemGroup> itemGroups = null;
 		boolean selectedItemGroup = mainWindow.getItemGroupDetail().getItemGroupId() != null;
-		
-		if((updateFlags & (ITEM_GROUP_LIST | ITEM_GROUP_DETAILS)) != 0)
+
+		if ((updateFlags & (ITEM_GROUP_LIST | ITEM_GROUP_DETAILS)) != 0)
 		{
 			itemGroups = StorageFacadeFactory.getInstance().getItemGroups();
-			if((updateFlags & ITEM_GROUP_LIST) != 0)
+			if ((updateFlags & ITEM_GROUP_LIST) != 0)
 			{
 				mainWindow.getItemGroupList().update(itemGroups);
 			}
 		}
-		
-		if((updateFlags & ITEM_GROUP_DETAILS) != 0)
+
+		if ((updateFlags & ITEM_GROUP_DETAILS) != 0)
 		{
-			if(selectedItemGroup)
+			if (selectedItemGroup)
 			{
-				for(ItemGroup itemGroup : itemGroups)
+				for (ItemGroup itemGroup : itemGroups)
 				{
-					if(itemGroup.getId() == mainWindow.getItemGroupDetail().getItemGroupId())
+					if (itemGroup.getId() == mainWindow.getItemGroupDetail().getItemGroupId())
 					{
 						mainWindow.getItemGroupDetail().update(itemGroup);
 					}
@@ -128,33 +131,33 @@ public class ContentUpdater extends Thread
 		}
 
 		Collection<Item> items = null;
-		if((updateFlags & (ITEM_LIST | ITEM_DETAILS)) != 0 && selectedItemGroup)
+		if ((updateFlags & (ITEM_LIST | ITEM_DETAILS)) != 0 && selectedItemGroup)
 		{
 			items = StorageFacadeFactory.getInstance().getItems(mainWindow.getItemGroupDetail().getItemGroupId());
-			if((updateFlags & ITEM_LIST) != 0)
+			if ((updateFlags & ITEM_LIST) != 0)
 			{
 				mainWindow.getItemList().update(items);
 			}
 		}
-		
-		if((updateFlags & ITEM_DETAILS) != 0 && selectedItemGroup)
+
+		if ((updateFlags & ITEM_DETAILS) != 0 && selectedItemGroup)
 		{
 			Integer itemId = mainWindow.getItemDetail().getItemId();
-			if(itemId != null)
+			if (itemId != null)
 			{
-				for(Item item : items)
+				for (Item item : items)
 				{
-					if(item.getId() == mainWindow.getItemDetail().getItemId())
+					if (item.getId() == mainWindow.getItemDetail().getItemId())
 					{
 						User theOne = null;
-						for(User user : StorageFacadeFactory.getInstance().getUsers())
+						for (User user : StorageFacadeFactory.getInstance().getUsers())
 						{
-							if(user.getId() == item.getAddedBy())
+							if (user.getId() == item.getAddedBy())
 							{
 								theOne = user;
 							}
 						}
-						if(theOne == null)
+						if (theOne == null)
 						{
 							theOne = new User(-1, "Invalid user", "", "");
 						}
@@ -168,7 +171,7 @@ public class ContentUpdater extends Thread
 			}
 		}
 	}
-	
+
 	public void setStopped(boolean stopped)
 	{
 		this.stopped = stopped;
@@ -177,7 +180,7 @@ public class ContentUpdater extends Thread
 			this.notifyAll();
 		}
 	}
-	
+
 	public void refreshAfterWhile(long time, int flags)
 	{
 		this.updateFlags = flags;
@@ -188,7 +191,7 @@ public class ContentUpdater extends Thread
 			this.notifyAll();
 		}
 	}
-	
+
 	public void refresh(int flags)
 	{
 		this.updateFlags = flags;

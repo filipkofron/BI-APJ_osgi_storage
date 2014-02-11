@@ -44,4 +44,16 @@ public class UserDAOImpl implements UserDAO
 	{
 		return new ArrayList<User>(users);
 	}
+	
+	@Override
+	public boolean login(String username, String password)
+	{
+		User user = getUserByName(username);
+		
+		if(user != null)
+		{
+			return user.checkPassword(password);
+		}
+		return false;
+	}
 }

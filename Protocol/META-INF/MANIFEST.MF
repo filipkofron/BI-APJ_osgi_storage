@@ -12,4 +12,5 @@ Require-Bundle: cz.kofron.storage.model;bundle-version="1.0.0",
  org.junit,
  cz.kofron.storage.business;bundle-version="1.0.0"
 Export-Package: cz.kofron.storage.protocol.request,
- cz.kofron.storage.protocol.response
+ cz.kofron.storage.protocol.response,
+ cz.kofron.storage.protocol.service

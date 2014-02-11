@@ -68,17 +68,7 @@ public class DefaultStorageFacade extends StorageFacade
 	@Override
 	public boolean login(String username, String password)
 	{
-		User user = DAOFactoryService.getInstance().getUserDAO().getUserByName(username);
-		if (user == null)
-		{
-			return false;
-		}
-		boolean corr = user.checkPassword(password);
-		if(corr)
-		{
-			currentUser = user;
-		}
-		return corr;
+		return DAOFactoryService.getInstance().getUserDAO().login(username, password);
 	}
 
 	@Override

@@ -1,7 +1,9 @@
-package server;
+package cz.kofron.storage.server;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+
+import cz.kofron.storage.server.impl.Server;
 
 public class Activator implements BundleActivator {
 
@@ -17,6 +19,15 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		
+		try
+		{
+			new Server();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	/*

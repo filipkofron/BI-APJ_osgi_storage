@@ -1,5 +1,7 @@
 package cz.kofron.storage.client;
 
+import java.util.logging.Logger;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -11,6 +13,7 @@ public class Activator implements BundleActivator {
 
 	private static BundleContext context;
 	private Connector connector;
+	private final static Logger log = Logger.getLogger("Activating client's netDAO service");
 	
 	static BundleContext getContext() {
 		return context;
@@ -25,6 +28,7 @@ public class Activator implements BundleActivator {
 		Client client = new Client();
 		connector = new Connector(client);
 		connector.start();
+		
 		bundleContext.registerService(DAOFactoryService.class, new DAOFactoryServiceFactory(client), null);
 	}
 
