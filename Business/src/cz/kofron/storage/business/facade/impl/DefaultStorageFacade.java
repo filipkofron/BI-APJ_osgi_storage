@@ -10,7 +10,8 @@ import cz.kofron.storage.model.entity.User;
 
 public class DefaultStorageFacade extends StorageFacade
 {
-
+	private User currentUser;
+	
 	@Override
 	public ItemGroup addItemGroup(String name, String description)
 	{
@@ -73,13 +74,24 @@ public class DefaultStorageFacade extends StorageFacade
 		{
 			return false;
 		}
-		return user.checkPassword(password);
+		boolean corr = user.checkPassword(password);
+		if(corr)
+		{
+			currentUser = user;
+		}
+		return corr;
 	}
 
 	@Override
 	public ArrayList<User> getUsers()
 	{
 		return DAOFactoryService.getInstance().getUserDAO().getUsers();
+	}
+
+	@Override
+	public User getCurrentUser()
+	{
+		return currentUser;
 	}
 
 }

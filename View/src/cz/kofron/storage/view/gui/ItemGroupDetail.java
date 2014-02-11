@@ -17,12 +17,12 @@ public class ItemGroupDetail extends GridPane
 	private TextArea descTextArea;
 	private Button addButton;
 	private Button saveButton;
-	private ActionHandler eventHandler;
+	private ActionHandler actionHandler;
 	private Integer itemGroupId = null;
 
-	public ItemGroupDetail(ActionHandler eventHandler)
+	public ItemGroupDetail(ActionHandler actionHandler)
 	{
-		this.eventHandler = eventHandler;
+		this.actionHandler = actionHandler;
 		nameLabel = new Label("Name:");
 		descLabel = new Label("Description:");
 
@@ -37,7 +37,7 @@ public class ItemGroupDetail extends GridPane
 			@Override
 			public void handle(ActionEvent event)
 			{
-				ItemGroupDetail.this.eventHandler.onAddItemGroup();
+				ItemGroupDetail.this.actionHandler.onAddItemGroup();
 			}
 		});
 
@@ -46,7 +46,7 @@ public class ItemGroupDetail extends GridPane
 			@Override
 			public void handle(ActionEvent event)
 			{
-				ItemGroupDetail.this.eventHandler.onSaveItemGroup();
+				ItemGroupDetail.this.actionHandler.onSaveItemGroup();
 			}
 		});
 

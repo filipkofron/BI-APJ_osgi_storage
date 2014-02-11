@@ -7,7 +7,7 @@ import cz.kofron.storage.model.entity.ItemGroup;
 import cz.kofron.storage.model.entity.User;
 
 public abstract class StorageFacade
-{
+{	
 	public abstract ItemGroup addItemGroup(String name, String description);
 
 	public abstract boolean removeItemGroup(ItemGroup itemGroup);
@@ -27,4 +27,6 @@ public abstract class StorageFacade
 	public abstract ArrayList<User> getUsers();
 	
 	public abstract boolean login(String username, String password);
+	
+	public abstract User getCurrentUser();
 }

@@ -63,6 +63,23 @@ public class ContentUpdater extends Thread
 					}
 				}
 				
+				if(!mainWindow.isLogged())
+				{
+					mainWindow.setLogged(StorageFacadeFactory.getInstance().login("pepa", "zdepa"));
+					if(!mainWindow.isLogged())
+					{
+						Platform.runLater(new Runnable()
+						{
+							@Override
+							public void run()
+							{
+								MessageBox.show("Couldn't log in.", 666, null);
+							}
+						});
+						continue;
+					}
+				}
+				
 				Platform.runLater(new Runnable()
 				{
 					@Override
@@ -137,6 +154,10 @@ public class ContentUpdater extends Thread
 						mainWindow.getItemDetail().update(item, theOne);
 					}
 				}
+			}
+			else
+			{
+				mainWindow.getItemDetail().update(new Item(-1, 0, "", 0, 0), new User(-1, "", "", ""));
 			}
 		}
 	}

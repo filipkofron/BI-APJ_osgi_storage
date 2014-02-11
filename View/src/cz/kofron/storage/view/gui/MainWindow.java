@@ -1,5 +1,7 @@
 package cz.kofron.storage.view.gui;
 
+import cz.kofron.storage.business.facade.StorageFacade;
+import cz.kofron.storage.business.facade.StorageFacadeFactory;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
@@ -15,6 +17,8 @@ public class MainWindow extends Application
 	private ItemGroupList itemGroupList;
 	private ItemGroupDetail itemGroupDetail;
 	private ActionHandler actionHandler;
+	
+	private boolean logged = false;
 
 	private ContentUpdater contentUpdater;
 	
@@ -25,12 +29,12 @@ public class MainWindow extends Application
 
 	private void prepareItemList()
 	{
-		itemList = new ItemList();
+		itemList = new ItemList(actionHandler);
 	}
 
 	private void prepareItemDetail()
 	{
-		itemDetail = new ItemDetail();
+		itemDetail = new ItemDetail(actionHandler);
 	}
 	
 	private void prepareItemGroupList()
@@ -143,5 +147,15 @@ public class MainWindow extends Application
 	public ContentUpdater getContentUpdater()
 	{
 		return contentUpdater;
+	}
+	
+	public boolean isLogged()
+	{
+		return logged;
+	}
+	
+	public void setLogged(boolean logged)
+	{
+		this.logged = logged;
 	}
 }
