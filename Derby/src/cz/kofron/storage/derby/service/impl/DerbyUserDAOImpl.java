@@ -33,8 +33,14 @@ public class DerbyUserDAOImpl implements UserDAO
 		try
 		{
 			userByName.setString(1, name);
+			System.out.println(userByName.toString());
+			
 			ResultSet rs = userByName.executeQuery();
-	        return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+			if(rs.next())
+			{
+				return new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+			}
+			return null;
 		}
 		catch (SQLException ex)
 		{

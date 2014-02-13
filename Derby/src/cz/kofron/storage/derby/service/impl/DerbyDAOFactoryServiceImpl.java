@@ -22,14 +22,11 @@ public class DerbyDAOFactoryServiceImpl extends DAOFactoryService
 	private ItemDAO itemDAO;
 	private ItemGroupDAO itemGroupDAO;
 	private UserDAO userDAO;
-	private BundleContext context;
 	private Connection derbyConnection;
 	private final static Logger log = Logger.getLogger(DerbyDAOFactoryServiceImpl.class.getName());
 
 	public DerbyDAOFactoryServiceImpl(BundleContext context)
 	{
-		this.context = context;
-
 		derbyConnection = createConnection();
 
 		try
@@ -48,6 +45,7 @@ public class DerbyDAOFactoryServiceImpl extends DAOFactoryService
 				Statement s2 = derbyConnection.createStatement();
 				s2.execute("INSERT INTO USERS VALUES(DEFAULT, '" + testUser.getUsername() + "', '" + testUser.getHash() + "', '" + testUser.getSalt() + "')");
 				log.info("Added test user");
+				derbyConnection.commit();
 			}
 			rs = m.getTables(null, null, "ITEMS", null);
 			if (!rs.next())
@@ -55,6 +53,7 @@ public class DerbyDAOFactoryServiceImpl extends DAOFactoryService
 				Statement s = derbyConnection.createStatement();
 				s.executeUpdate("CREATE TABLE ITEMS (ID INT NOT NULL GENERATED ALWAYS AS IDENTITY, TIMEADDED BIGINT, INFO VARCHAR(200), GROUPID INT, ADDEDBY INT, PRIMARY KEY (ID))");
 				log.log(Level.INFO, "Table ITEMS created.");
+				derbyConnection.commit();
 			}
 			rs = m.getTables(null, null, "ITEMGROUPS", null);
 			if (!rs.next())
@@ -62,6 +61,7 @@ public class DerbyDAOFactoryServiceImpl extends DAOFactoryService
 				Statement s = derbyConnection.createStatement();
 				s.executeUpdate("CREATE TABLE ITEMGROUPS (ID INT NOT NULL GENERATED ALWAYS AS IDENTITY, NAME VARCHAR(200), DESCRIPTION VARCHAR(200), PRIMARY KEY (ID))");
 				log.log(Level.INFO, "Table ITEMGROUPS created.");
+				derbyConnection.commit();
 			}
 			derbyConnection.commit();
 		}
