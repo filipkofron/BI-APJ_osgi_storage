@@ -136,11 +136,11 @@ public class ActionHandler
 			{
 				if (value)
 				{
-					MessageBox.show("Saved succesfully", MessageBox.INFO, null);
+					MessageBox.show("Added succesfully", MessageBox.INFO, null);
 				}
 				else
 				{
-					MessageBox.show("Saved failed!", MessageBox.ERROR, null);
+					MessageBox.show("Adding failed!", MessageBox.ERROR, null);
 				}
 				mainWindow.getContentUpdater().refresh(ContentUpdater.ITEM_LIST | ContentUpdater.ITEM_DETAILS);
 			}

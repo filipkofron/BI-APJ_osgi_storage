@@ -19,7 +19,6 @@ public class Connector
 		{
 			while(!stopped)
 			{
-				log.info("client.isConnected(): " + client.isConnected());
 				if(!client.isConnected())
 				{
 					try
