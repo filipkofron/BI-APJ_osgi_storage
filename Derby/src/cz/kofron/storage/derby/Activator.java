@@ -23,8 +23,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		log.info("Registering derbyDB service.");
-		bundleContext.registerService(DAOFactoryService.class, new DerbyDAOFactoryServiceImpl(bundleContext), null);
+		//log.info("Registering derbyDB service.");
+		//bundleContext.registerService(DAOFactoryService.class, new DerbyDAOFactoryServiceImpl(bundleContext), null);
 	}
 
 	/*
